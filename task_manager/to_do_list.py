@@ -41,7 +41,6 @@ def mark_task_completed():
     if not task_list:
         print("No tasks available to mark as completed or revert.")
         return
-
     printing_tasks()
     task_input = input("Enter the task number to toggle completion status: ")
     if task_input.isdigit():
@@ -111,7 +110,6 @@ def main_menu():
         print("6: Exit")
         choice = input("Choose an option: ")
         print("\n")
-
         match choice:
             case "1":
                 add_task()
@@ -128,7 +126,5 @@ def main_menu():
                 break
             case _:
                 print("Invalid option. Please choose a valid menu option.")
-
-
 # Run the application
 main_menu()
