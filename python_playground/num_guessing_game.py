@@ -6,7 +6,7 @@ print("  Welcome to the Number Guessing Game!")
 print("-"*40)
 
 #game function
-def guess_game(random_number, min_value, max_value):
+def guess_game(random_number, min_value, max_value, difficulty_level):
     tries_counter = 0
     while True:
         guess = get_valid_input("What is your guess?: ", min_value, max_value)
@@ -21,23 +21,23 @@ def guess_game(random_number, min_value, max_value):
             break
         else:
             print("Nope, Try again.")
-        hints(tries_counter, random_number, min_value, max_value, last_guess)
+        hints(tries_counter, random_number, min_value, max_value, last_guess, difficulty_level)
 
 #difficulties 
 def difficulties(inp):
     match inp:
         case "1":
-            print("\nThinking of a number between 1-10")
-            return random.randint(1, 10), 1, 10
-        case "2":
             print("\nThinking of a number between 1-25")
-            return random.randint(1, 25), 1, 25
-        case "3":
+            return random.randint(1, 25), 1, 25, "Easy"
+        case "2":
             print("\nThinking of a number between 1-50")
-            return random.randint(1, 50), 1, 50
-        case "4":
+            return random.randint(1, 50), 1, 50, "Normal"
+        case "3":
             print("\nThinking of a number between 1-100")
-            return random.randint(1, 100), 1, 100
+            return random.randint(1, 100), 1, 100, "Hard"
+        case "4":
+            print("\nThinking of a number between 1-500")
+            return random.randint(1, 500), 1, 500, "Professional" 
         case "5":
             min_range = get_valid_input("Enter the minimum number for the range: ", 1, 1000)
             max_range = get_valid_input("Enter the maximum number for the range: " , 1, 10000)
@@ -63,27 +63,70 @@ def get_valid_input(prompt, min_value, max_value):
         else:
             print("Invalid input. Please enter a valid number.") 
 
+#proximity hint
+def proximity_hint(random_number, last_guess, difficulty_level):
+    if last_guess is None:
+        return  
+    difference = abs(random_number - last_guess)
+    #Easy
+    if difficulty_level == "Easy":
+        if difference <= 5:
+            print(f"! Hint: You're getting warmer! The number is within 10 of your last guess.")
+        elif difference <= 10:
+            print(f"! Hint: You're not too far! The number is within 20 of your last guess.")
+    #Normal
+    elif difficulty_level == "Normal":
+        if difference <= 5:
+            print(f"! Hint: You're very close! The number is within 5 of your last guess.")
+        elif difference <= 15:
+            print(f"! Hint: The number is within 15 of your last guess.")
+    #Hard
+    elif difficulty_level == "Hard":
+        if difference <= 5:
+            print(f"! Hint: You're very close! The number is within 5 of your last guess.")
+        elif difference <= 10:
+            print(f"! Hint: The number is within 10 of your last guess.")
+        elif difference <= 20:
+            (f"! Hint: Getting warmer! The number is within 20 of your last guess.")    
+    #Professional
+    #other format of hints
+    elif difficulty_level == "professional":
+        if difference <= 200:
+            print("! Pff, its freezing")
+        elif difference <= 150:
+            print("! Brrr, Very Cold")
+        elif difference <= 100:
+            print("! Pretty Chilling")
+        elif difference <= 50:
+            print("! Getting warmer!")
+        elif difference <= 20:
+            print("! Gosh! is getting hot")     
+        elif difference <= 10:
+            print("! Its HOT in here!!!")      
+
+
 #hint function
-def hints(tries, random_number, min_value, max_value, last_guess):
+def hints(tries, random_number, min_value, max_value, last_guess, difficulty_level):
+    proximity_hint(random_number, last_guess, difficulty_level)
     if tries % 3 == 0:
         if random_number % 2 == 0:
-            print("\nHint: The number is even.")
+            print("\n! Hint: The number is even.")
         else:
-            print("\nHint: The number is odd.")
+            print("\n! Hint: The number is odd.")
     elif tries % 5 == 0:
         if random_number % 3 == 0:
-            print("\nHint: The number is divisible by 3.")
+            print("\n! Hint: The number is divisible by 3.")
         elif random_number % 5 == 0:
-            print("\nHint: The number is divisible by 5.")
+            print("\n! Hint: The number is divisible by 5.")
         else:
-            print("\nHint: The number is not divisible by 3 or 5.")
+            print("\n! Hint: The number is not divisible by 3 or 5.")
     elif tries % 7 == 0:
         midpoint = (min_value + max_value) // 2
         if random_number > midpoint:
-            print(f"Hint: The number is greater than {midpoint}.")
+            print(f"! Hint: The number is greater than {midpoint}.")
         else:
-            print(f"Hint: The number is less than or equal to {midpoint}.")
- 
+            print(f"! Hint: The number is less than or equal to {midpoint}.")
+        
 
 def menu():
     while True:
@@ -102,8 +145,8 @@ def menu():
             break
         else:
             try:
-                random_num, min_val, max_val = difficulties(str(user_choice))
-                guess_game(random_num, min_val, max_val)
+                random_num, min_val, max_val, difficulty_level = difficulties(str(user_choice))
+                guess_game(random_num, min_val, max_val, difficulty_level)
             except ValueError as e:
                 print("There was an error processing the game difficulty", e)
 
