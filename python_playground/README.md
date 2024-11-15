@@ -7,10 +7,10 @@ Welcome to the **Number Guessing Game**! This interactive Python game challenges
 ## Features 🌟
 
 - **Multiple Difficulty Levels**:
-  - Easy: Guess a number between 1-10.
-  - Normal: Guess a number between 1-25.
-  - Hard: Guess a number between 1-50.
-  - Professional: Guess a number between 1-100.
+  - Easy: Guess a number between 1-25.
+  - Normal: Guess a number between 1-50.
+  - Hard: Guess a number between 1-100.
+  - Professional: Guess a number between 1-500.
   - Custom Challenge: Set your own range of numbers.
 
 - **Hints to Assist You**:
