@@ -31,3 +31,10 @@ To run any of the projects, follow these steps:
    ```bash
    git clone https://github.com/yourusername/PythonPracticeHub.git
 
+2. Navigate to the directory of the project you want to run:
+  ```bash
+  cd PythonPracticeHub/<directory_name>
+
+3. Run the Python script:
+   ```bash
+   python <script_name>.py
