@@ -2,7 +2,7 @@ import random
 from time import sleep
 
 print("\n" + "-"*40)
-print("Welcome to the Number Guessing Game!")
+print("  Welcome to the Number Guessing Game!")
 print("-"*40)
 
 #game function
@@ -96,7 +96,9 @@ def menu():
         print("6: Quit")
         user_choice = get_valid_input("Choose a difficulty level (1-5, choose 6 to quit): ", 1, 6)
         if user_choice == 6:
-            print("Thanks for playing the game!")
+            print("\n" + "-"*35)
+            print("   Thanks for playing the game!")
+            print("-"*35)
             break
         else:
             try:
