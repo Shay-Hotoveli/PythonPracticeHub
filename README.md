@@ -32,7 +32,7 @@ To run any of the projects, follow these steps:
    git clone https://github.com/yourusername/PythonPracticeHub.git
 
 2. Navigate to the directory of the project you want to run:
-  cd PythonPracticeHub/<directory_name>
+- cd PythonPracticeHub/<directory_name>
 
 3. Run the Python script:
-   python <script_name>.py
+- python <script_name>.py
