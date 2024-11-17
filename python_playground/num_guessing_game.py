@@ -26,19 +26,19 @@ def guess_game(random_number, min_value, max_value, difficulty_level):
 #difficulties 
 def difficulties(inp):
     match inp:
-        case "1":
+        case 1:
             print("\nThinking of a number between 1-25")
             return random.randint(1, 25), 1, 25, "Easy"
-        case "2":
+        case 2:
             print("\nThinking of a number between 1-50")
             return random.randint(1, 50), 1, 50, "Normal"
-        case "3":
+        case 3:
             print("\nThinking of a number between 1-100")
             return random.randint(1, 100), 1, 100, "Hard"
-        case "4":
+        case 4:
             print("\nThinking of a number between 1-500")
             return random.randint(1, 500), 1, 500, "Professional" 
-        case "5":
+        case 5:
             min_range = get_valid_input("Enter the minimum number for the range: ", 1, 1000)
             max_range = get_valid_input("Enter the maximum number for the range: " , 1, 10000)
             if min_range < max_range:
@@ -90,20 +90,19 @@ def proximity_hint(random_number, last_guess, difficulty_level):
             (f"! Hint: Getting warmer! The number is within 20 of your last guess.")    
     #Professional
     #other format of hints
-    elif difficulty_level == "professional":
-        if difference <= 200:
-            print("! Pff, its freezing")
-        elif difference <= 150:
-            print("! Brrr, Very Cold")
-        elif difference <= 100:
-            print("! Pretty Chilling")
-        elif difference <= 50:
-            print("! Getting warmer!")
+    elif difficulty_level == "Professional":
+        if difference <= 10:
+            print("! Its HOT in here!!!")      
         elif difference <= 20:
             print("! Gosh! is getting hot")     
-        elif difference <= 10:
-            print("! Its HOT in here!!!")      
-
+        elif difference <= 50:
+            print("! Getting warmer!")
+        elif difference <= 100:
+            print("! Pretty Chilling")
+        elif difference <= 150:
+            print("! Brrr, Very Cold")
+        elif difference <= 200:
+            print("! Pff, its freezing")
 
 #hint function
 def hints(tries, random_number, min_value, max_value, last_guess, difficulty_level):
@@ -145,7 +144,7 @@ def menu():
             break
         else:
             try:
-                random_num, min_val, max_val, difficulty_level = difficulties(str(user_choice))
+                random_num, min_val, max_val, difficulty_level = difficulties(user_choice)
                 guess_game(random_num, min_val, max_val, difficulty_level)
             except ValueError as e:
                 print("There was an error processing the game difficulty", e)
